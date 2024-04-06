@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O.Z Shopping site</title>
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-rows: 80px 0.6fr 1.5fr 0.2fr;
+        grid-template-columns: 1fr;
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+    }
+
+    nav {
+        background-color: #333;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+    .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+
+    .logo h1 {
+        margin: 0;
+        font-size: 24px;
+    }
+
+    .logo a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+    }
+    .menu-icon{
+        display: none;
+    }
+
+    .nav-links ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+
+    .nav-links ul li {
+        margin-right: 20px;
+    }
+    .nav-links ul li a{
+        text-decoration: none;
+        font-weight: 600;
+        color: white;
+    }
+
+    .nav-links .buttons {
+        display: flex;
+        align-items: center;
+        margin-left: 20px;
+    }
+
+    .main-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 20px; 
+        margin-bottom: 20px; 
+    }
+
+    .image-slider {
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    .image-slider img {
+        width: 100%;
+        height: 230px;
+        flex: 0 0 100%;
+        object-fit: contain;
+        transition: transform 0.5s ease;
+    }
+    .content {
+        padding: 20px;
+        display: grid;
+        grid-template-rows: 30px 1fr;
+        gap: 20px;
+    }
+
+    .top-div {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+        justify-content: space-around;
+        margin-bottom: 10px;
+    }
+
+    .bottom-div {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 4px;
+        margin-top: 50px;
+
+    }
+    .item {
+      
+        background-color: white;
+        color: gray;
+        font-weight: 700;
+        width: 240px;
+        min-height: 10rem;
+        box-shadow: 3px 3px 5px gray;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding-bottom: 15px;
+        padding-top: 15px;
+        margin-bottom: 20px;
+    }
+
+    .item img {
+        width: 100px;
+        height: auto;
+        margin: auto;
+    }
+
+    .item-details {
+        display: flex;
+        flex-direction: column;
+    }
+    .btn{
+        background-color: black;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 5px;
+        border: none;
+        font-size: 18px;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .buttons {
+        display: flex;
+     
+    }
+    .buttons .add-to-cart-btn{
+        background-color: black;
+        color: white;
+        margin-right: 5px;
+    }
+   
+    .buttons button {
+        padding: 5px 10px;
+        cursor: pointer;
+        background-color: orange;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+       
+    }
+  
+    footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        display: flex;
+    }
+       
+    @media only screen and (max-width: 960px) {
+        nav{
+            padding: 20px;
+        }
+        .buttons button{
+            margin-bottom: 15px;
+        }
+    .main-container {
+        display: flex;
+        justify-content: center;
+       
+    }
+    .content {
+        padding: 10px;
+    }
+    .arrows{
+            display: none;
+        } 
+        .overlay {
+        display: none;
+    }
+        .menu-icon {
+                display: block;
+            }
+            .close-icon {
+                display: none;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px; 
+                left: 0;
+                background-color: #333;
+                width: 100%;
+                text-align: center;
+            }
+            .nav-links ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                padding: 20px;
+            }
+            .nav-links ul li {
+                margin-right: 20px;
+                padding: 10px;
+            }
+            .nav-links ul li a {
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+            }
+        
+        .menu-icon img {
+            width: 30px;
+            height: 30px;
+        }
+        .image-slider img {
+        height: 180px;
+    }
+        .bottom-div {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 4px;
+    }
+    .item {
+      background-color: white;
+      color: gray;
+      font-weight: 700;
+      width: 100%;
+      min-height: 10rem;
+      box-shadow: 3px 3px 5px gray;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding-bottom: 15px;
+      padding-top: 15px;
+      margin-bottom: 20px;
+  } 
+    }
+</style>
+</head>
+<body>
+
+    <div class="grid-container">
+         <nav>
+        <div class="logo">
+            <h1><a href="#">Online Shop</a></h1>
+        </div>
+        <div class="menu-icon" id="menuIcon">
+            <img src="icons/menu.png" alt="Open menu icon">
+        </div>
+        <div class="nav-links" id="navLinks">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+            <div class="buttons">
+                <button>Cart <span id="cartCount">0</span></button>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="main-container">
+        <div><img src="images/left-arrow.png" class="arrows"></div>
+        <div class="image-slider" >
+            <img src="images/c4.png" alt="Image 1">
+            <img src="images/c5.png" alt="Image 2">
+            <img src="images/background.png" alt="Image 3">
+            
+            <img src="images/c4.png" alt="Image 1">
+            <img src="images/c5.png" alt="Image 2">
+            <img src="images/background.png" alt="Image 3">
+        </div>
+        <div><img src="images/right-arrow.png" class="arrows"></div>
+    </div>
+    <div class="content">
+        <div class="top-div">
+            <button class="btn" id="allButton">All</button>
+            <button class="btn" id="furnitureButton">Furniture</button>
+            <button class="btn" id="clothesButton">Clothes</button>
+            <button class="btn" id="electronicsButton">Electronics</button>
+        </div>
+        <div class="bottom-div" id="contentArea">
+            
+        </div>
+    </div>
+    <footer>
+        <div class="top"></div>
+        <div class="bottom"></div>
+    </footer>
+</div>
+
+</body>
+<script>
+   
+function toggleNav() {
+    var navLinks = document.getElementById("navLinks");
+    var overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+
+    if (navLinks.style.display === "block") {
+        navLinks.style.display = "none";
+        document.body.style.overflow = "auto"; 
+        document.body.removeChild(document.querySelector('.overlay')); 
+    } else {
+        navLinks.style.display = "block";
+        document.body.style.overflow = "hidden"; 
+        document.body.appendChild(overlay); 
+    }
+}
+
+
+document.getElementById("menuIcon").addEventListener("click", toggleNav);
+
+   var imageIndex = 0;
+    var slideInterval = setInterval(slideImage, 3000); 
+
+    function slideImage() {
+        var images = document.querySelectorAll('.image-slider img');
+        var numImages = images.length;
+        imageIndex = (imageIndex + 1) % numImages;
+        var slideWidth = -imageIndex * 100 + '%';
+        document.querySelector('.image-slider').style.transform = 'translateX(' + slideWidth + ')';
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+   
+    var cartCountElement = document.getElementById('cartCount');
+    
+    var cartCount = 0;
+   
+    var cartItems = [];
+
+    
+    var bottomDiv = document.getElementById('contentArea');
+
+    function displayItems(category) {
+        bottomDiv.innerHTML = '';
+
+        jsonData.categories.forEach(function (cat) {
+            if (category === 'all' || cat.name === category) {
+                cat.items.forEach(function (item) {
+                    displayItem(item);
+                });
+            }
+        });
+    }
+
+    function displayItem(item) {
+        var itemDiv = document.createElement('div');
+        itemDiv.classList.add('item');
+
+        var img = document.createElement('img');
+        img.src = item.image;
+        itemDiv.appendChild(img);
+
+        var itemDetailsDiv = document.createElement('div');
+        itemDetailsDiv.classList.add('item-details');
+
+        var nameDiv = document.createElement('div');
+        nameDiv.textContent = item.name;
+        itemDetailsDiv.appendChild(nameDiv);
+
+        var priceDiv = document.createElement('div');
+        priceDiv.textContent = 'R' + item.price.toFixed(2);
+        itemDetailsDiv.appendChild(priceDiv);
+
+        var buttonsDiv = document.createElement('div');
+        buttonsDiv.classList.add('buttons');
+
+        var addToCartBtn = document.createElement('button');
+        addToCartBtn.textContent = 'Add Cart';
+        addToCartBtn.classList.add('add-to-cart-btn'); 
+        addToCartBtn.dataset.itemName = item.name;
+        addToCartBtn.dataset.price = item.price;
+        buttonsDiv.appendChild(addToCartBtn);
+
+        var buyNowBtn = document.createElement('button');
+        buyNowBtn.textContent = 'Buy Now';
+        buttonsDiv.appendChild(buyNowBtn);
+
+        itemDetailsDiv.appendChild(buttonsDiv);
+        itemDiv.appendChild(itemDetailsDiv);
+
+        bottomDiv.appendChild(itemDiv);
+    }
+
+ 
+    var jsonData = {
+        "categories": [
+            {
+                "name": "furniture",
+                "items": [
+                    {
+                        "name": "Chair",
+                        "price": 49.99,
+                        "image": "furniture/p8.png"
+                    },
+                    {
+                        "name": "Casual Shoes",
+                        "price": 39.99,
+                        "image": "furniture/p11.png"
+                    }
+                ]
+            },
+            {
+                "name": "electronics",
+                "items": [
+                    {
+                        "name": "iPhone",
+                        "price": 18564.89,
+                        "image": "images/p6.png"
+                    },
+                    {
+                        "name": "Laptop",
+                        "price": 699.99,
+                        "image": "images/laptop2.png"
+                    },
+                    {
+                        "name": "Watch",
+                        "price": 699.99,
+                        "image": "images/w1.png"
+                    },
+                    {
+                        "name": "Monitor Screen",
+                        "price": 699.99,
+                        "image": "images/pr8.png"
+                    },
+                    {
+                        "name": "Fridge",
+                        "price": 699.99,
+                        "image": "images/pr4.png"
+                    },
+                    {
+                        "name": "Washing Machine",
+                        "price": 699.99,
+                        "image": "images/pr1.png"
+                    },
+                    {
+                        "name": "Microwave",
+                        "price": 699.99,
+                        "image": "images/pr3.png"
+                    },
+                    {
+                        "name": "Game Console",
+                        "price": 699.99,
+                        "image": "images/pr12.png"
+                    },
+                ]
+            },
+            {
+                "name": "clothes",
+                "items": [
+                    {
+                        "name": "Cap",
+                        "price": 19.99,
+                        "image": "205506.jpg"
+                    },
+                    {
+                        "name": "Jeans",
+                        "price": 29.99,
+                        "image": "jeans.jpg"
+                    }
+                ]
+            }
+        ]
+    };
+
+    
+    cartCountElement.textContent = cartCount;
+
+   
+    displayItems('all');
+
+  
+    var categoryButtons = document.querySelectorAll('.top-div button');
+    categoryButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var category = button.id.slice(0, -6);
+            displayItems(category);
+        });
+    });
+
+ 
+    bottomDiv.addEventListener('click', function (event) {
+        if (event.target.classList.contains('add-to-cart-btn')) {
+           
+            cartCount++;
+            
+            cartCountElement.textContent = cartCount;
+
+         
+            var itemName = event.target.dataset.itemName;
+            var itemPrice = parseFloat(event.target.dataset.price);
+            cartItems.push({ name: itemName, price: itemPrice });
+        }
+    });
+
+    
+    var cartButton = document.querySelector('.buttons button');
+    cartButton.addEventListener('click', function() {
+        
+        var totalPriceWithTax = cartItems.reduce(function(total, item) {
+            return total + (item.price * 1.15); 
+        }, 0);
+
+
+        var cartPageContent = `
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Cart</title>
+                <style>              
+            body {
+                position: relative;
+                overflow: hidden;
+                min-height:100vh;
+                 display: grid;
+                grid-template-rows: 80px 1.5fr 0.2fr;
+                grid-template-columns: 1fr;
+                min-height: 100vh;
+                position: relative;
+                overflow: hidden;
+                }
+
+                 nav {
+                  background-color: #333;
+                  color: white;
+                 display: flex;
+                 align-items: center;
+              justify-content: space-between;
+               padding: 0 20px;
+                }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .logo a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav-links ul li {
+            margin-right: 20px;
+        }
+        .nav-links ul li a{
+        text-decoration: none;
+        font-weight: 600;
+        color: white;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+        .buy-btn{
+            padding: 5px 10px;
+        cursor: pointer;
+        background-color: orange;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        }
+        .buttons button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }    
+        .menu-icon{
+        display: none;
+    }
+     footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px;
+    }
+    @media only screen and (max-width: 760px) {
+        .nav-links {
+            display: none;
+        }
+        
+        .menu-icon {
+            display: block;
+            cursor: pointer;
+        }
+
+        .menu-icon img {
+            width: 30px;
+            height: 30px;
+        }
+    }     
+        </style>
+            </head>
+            <body>
+                <!-- Navigation -->
+                <nav>
+        <div class="logo">
+            <h1><a href="#">Online Shop</a></h1>
+        </div>
+        <div class="menu-icon">
+            <a href="index.html" title="open menu icons">
+                <img src="icons/menu.png" alt="Open menu icon">
+            </a>
+        </div>
+        <div class="nav-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+                <div class='container'>
+                <h2>Items in Cart</h2>
+                ${cartItems.map(item => `
+                    <img src={${item.image}}/>
+                    <p>${item.name}</p><p> R${(item.price * 1.15).toFixed(2)} <strong>Including</strong> 15% tax.</p>
+                `).join('')}
+                <!-- Total price -->
+                <h3>Total Price (including tax): R${totalPriceWithTax.toFixed(2)}</h3>
+                <button class='buy-btn'>Buy items</button>
+                </div>
+                <!-- Footer -->
+                <footer>
+                   Footer
+                </footer>
+            </body>
+            </html>
+        `;
+
+      
+        var cartPage = window.open('');
+        cartPage.document.write(cartPageContent);
+    }
+    );
+});
+</script>
+</html>
