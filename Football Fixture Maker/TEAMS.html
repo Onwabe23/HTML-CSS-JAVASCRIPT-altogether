@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament & League Website</title>
+    <style>
+        html {
+            background-image: url('R.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat; 
+            min-height: 100vh;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px 0;
+            text-align: center;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to our Fixture Generator App</h1>
+        <p>This website allows you to create tournaments and leagues for your favorite sports!</p>
+        <a href="#" class="btn" onclick="createTournament()">Create Tournament</a>
+        <a href="create_league.html" class="btn">Create League</a>
+    </div>
+    <footer>Created by <strong>O.Zibeke</strong></footer>
+
+    <script>
+        function createTournament() {
+            var tournamentName = prompt("Enter the name of the tournament:");
+            var numberOfTeams = prompt("Enter the number of teams:");
+            var teamNames = [];
+
+            for (var i = 0; i < numberOfTeams; i++) {
+                var teamName = prompt("Enter team " + (i + 1) + " name:");
+                teamNames.push(teamName);
+            }
+
+            var pairings = generatePairings(teamNames);
+            sessionStorage.setItem('tournamentName', tournamentName);
+            sessionStorage.setItem('pairings', JSON.stringify(pairings));
+            window.location.href = 'pairings.html';
+        }
+
+        function generatePairings(teams) {
+            var pairings = [];
+            var shuffledTeams = shuffleArray(teams);
+
+            // Generate random time between 9:30 to 16:00 for each pairing
+            var startTime = new Date();
+            startTime.setHours(9, 30, 0); // Start time is 9:30
+
+            for (var i = 0; i < shuffledTeams.length; i += 2) {
+                if (i + 1 < shuffledTeams.length) {
+                    var time = new Date(startTime.getTime() + Math.floor(Math.random() * (6 * 60 * 60 * 1000))); // Random time between 9:30 to 16:00
+                    pairings.push({
+                        teams: shuffledTeams[i] + " vs " + shuffledTeams[i + 1],
+                        time: time.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+                    });
+                } else {
+                    
+                    pairings.push({
+                        teams: shuffledTeams[i] + " is a standby",
+                        time: ""
+                    });
+                }
+            }
+
+            return pairings;
+        }
+
+        // Function to shuffle array elements
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            return array;
+        }
+
+        function createLeague() {
+            var leagueName = prompt("Enter the name of the league:");
+            var numberOfTeams;
+            do {
+                numberOfTeams = parseInt(prompt("Enter the number of teams (must be >= 4):"));
+            } while (isNaN(numberOfTeams) || numberOfTeams < 4);
+
+            var teamNames = [];
+            for (var i = 0; i < numberOfTeams; i++) {
+                var teamName = prompt("Enter team " + (i + 1) + " name:");
+                teamNames.push(teamName);
+            }
+
+            // Shuffle the teams randomly
+            teamNames = shuffleArray(teamNames);
+
+            sessionStorage.setItem('leagueName', leagueName);
+            sessionStorage.setItem('teams', JSON.stringify(teamNames));
+            window.location.href = 'pairings.html';
+        }
+
+        // Function to shuffle array elements
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            return array;
+        }
+
+    </script>
+</body>
+</html>

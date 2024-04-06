@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>League Results</title>
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('R.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 36px;
+        }
+        .pairing {
+            margin-bottom: 10px;
+            margin-left: 30px;
+            margin-right: 30px;
+            background-color: red;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .team {
+            flex: 1;
+            font-size: 28px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .vs,
+        .time {
+            background-color: darkblue;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .pagination {
+            margin-top: 20px;
+        }
+        .pagination button {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        .pagination button:hover {
+            background-color: #45a049;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px 0;
+            text-align: center;
+            color: white;
+        }
+        #clearStorageBtn{
+            margin: 10px auto;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            
+        }
+        #clearStorageBtn:hover{
+            opacity: 0.7;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>League Results</h1>
+        <div id="schedule"></div>
+        <div class="pagination" id="pagination"></div>
+        <button id="clearStorageBtn" onclick="clearLocalStorage()">Clear Storage & Go to TEAMS</button>
+
+    </div>
+    <footer>Created by <strong>O.Zibeke</strong></footer>
+    <script>
+        
+         function clearLocalStorage() {
+            localStorage.clear();
+            window.location.href = "TEAMS.html";
+        }
+        
+        var schedule = JSON.parse(localStorage.getItem('league_schedule'));
+        var currentPage = 0;
+
+       
+        function displayMatches() {
+            var scheduleDiv = document.getElementById("schedule");
+            scheduleDiv.innerHTML = ""; 
+
+            var matches = schedule[currentPage];
+            if (matches) {
+                matches.forEach(function(match) {
+                    var matchDiv = document.createElement("div");
+                    matchDiv.classList.add("pairing");
+                    matchDiv.innerHTML = "<span class='team'>" + match[0] + "</span>" +
+                                          "<span class='vs'>vs</span>" +
+                                          "<span class='team'>" + match[1] + "</span>" +
+                                          "<span class='time'>Kickoff time: " + match[2] + "</span>";
+                    scheduleDiv.appendChild(matchDiv);
+                });
+            }
+        }
+
+        // Display pagination buttons
+        function displayPagination() {
+            var paginationDiv = document.getElementById("pagination");
+            paginationDiv.innerHTML = ""; // Clear previous pagination
+
+            var numPages = schedule.length;
+            if (numPages > 1) {
+                for (var i = 0; i < numPages; i++) {
+                    var button = document.createElement("button");
+                    button.textContent = "Day " + (i + 1);
+                    button.onclick = function() {
+                        currentPage = parseInt(this.textContent.slice(4)) - 1;
+                        displayMatches();
+                    };
+                    paginationDiv.appendChild(button);
+                }
+            }
+        }
+        displayMatches();
+        displayPagination();
+    </script>
+</body>
+</html>
