@@ -25,6 +25,7 @@
         }
         h1 {
             font-size: 36px;
+            color:white;
         }
         .pairing {
             margin-bottom: 10px;
@@ -92,10 +93,10 @@
 </head>
 <body>
     <div class="container">
-        <h1>League Results</h1>
+        <h1>League Fixture</h1>
         <div id="schedule"></div>
         <div class="pagination" id="pagination"></div>
-        <button id="clearStorageBtn" onclick="clearLocalStorage()">Clear Storage & Go to TEAMS</button>
+        <button id="clearStorageBtn" onclick="clearLocalStorage()">Delete League</button>
 
     </div>
     <footer>Created by <strong>O.Zibeke</strong></footer>
@@ -103,7 +104,7 @@
         
          function clearLocalStorage() {
             localStorage.clear();
-            window.location.href = "TEAMS.html";
+            window.location.href = "index.html";
         }
         
         var schedule = JSON.parse(localStorage.getItem('league_schedule'));

@@ -110,19 +110,25 @@
             opacity: 0.7;
             color: white;
         }
+    @media (max-width:760px){
+        .vs,
+        .time{
+            font-size: 13px;
+        }
+    }
     </style>
 </head>
 <body>
     <h1 id="tournamentName"></h1>
     <div id="pairings"></div>
-    <button id="clearStorageBtn" onclick="clearLocalStorage()">Clear Storage & Go to TEAMS</button>
+    <button id="clearStorageBtn" onclick="clearLocalStorage()">Delete Tournament</button>
     <footer>Created by <strong>O.Zibeke</strong></footer>
 
     <script>
          // Function to clear local storage and redirect to TEAMS.html
          function clearLocalStorage() {
             localStorage.clear();
-            window.location.href = "TEAMS.html";
+            window.location.href = "index.html";
         }
 
         window.onload = function() {

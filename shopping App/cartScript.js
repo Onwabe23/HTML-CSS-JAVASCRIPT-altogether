@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var itemElement = document.createElement('div');
             itemElement.classList.add('cart-item');
 
-            var itemNameElement = document.createElement('img');
+            var itemImageElement = document.createElement('img');
             itemImageElement.textContent = item.image;
             itemElement.appendChild(itemImageElement);
 

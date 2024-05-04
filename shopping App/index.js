@@ -57,6 +57,7 @@ function displayItem(item) {
     addToCartBtn.textContent = 'Add to Cart';
     addToCartBtn.classList.add('add-to-cart-btn'); 
     addToCartBtn.dataset.itemName = item.name;
+    addToCartBtn.dataset.itemImage = item.image;
     addToCartBtn.dataset.price = item.price;
     buttonsDiv.appendChild(addToCartBtn);
 
@@ -147,8 +148,9 @@ bottomDiv.addEventListener('click', function (event) {
 
       
         var itemName = event.target.dataset.itemName;
+        var itemImage = event.target.dataset.itemImage;
         var itemPrice = parseFloat(event.target.dataset.price);
-        cartItems.push({ name: itemName, price: itemPrice });
+        cartItems.push({ name: itemName, price: itemPrice, image: itemImage });
     }
 });
 });

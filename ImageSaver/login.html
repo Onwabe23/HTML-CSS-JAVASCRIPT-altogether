@@ -12,7 +12,8 @@
         <h1>Login</h1>
         <form id="loginForm" onsubmit="login(); return false;">
             <input type="text" id="username" placeholder="Username" required>
-            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="password" placeholder="Password" required><br>
+            <span id="passwordError" style="color: red;"></span><br/>
             <button type="submit">Login</button>
         </form>
         <p>Don't have an account? <a href="register.html">Register here</a>.</p>

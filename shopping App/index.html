@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>O.Z Shopping site</title>
 <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
     .grid-container {
         display: grid;
         grid-template-rows: 80px 0.6fr 1.5fr 0.2fr;
@@ -79,6 +83,7 @@
         justify-content: space-between;
         margin-top: 20px; 
         margin-bottom: 20px; 
+        
     }
 
     .image-slider {
@@ -110,10 +115,10 @@
     }
 
     .bottom-div {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-gap: 4px;
-        margin-top: 50px;
+        margin-top: 10px;
+       display: flex;
+       flex-wrap: wrap;
+       justify-content: space-between;
 
     }
     .item {
@@ -129,6 +134,7 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        padding-right: 1px;
         padding-bottom: 15px;
         padding-top: 15px;
         margin-bottom: 20px;
@@ -186,8 +192,9 @@
     }
        
     @media only screen and (max-width: 960px) {
-        nav{
-            padding: 20px;
+        .grid-container{
+        grid-template-rows: 80px 340px 1.5fr 0.2fr;
+        grid-template-columns: 1fr;
         }
         .buttons button{
             margin-bottom: 15px;
@@ -197,9 +204,7 @@
         justify-content: center;
        
     }
-    .content {
-        padding: 10px;
-    }
+    
     .arrows{
             display: none;
         } 
@@ -208,6 +213,7 @@
     }
         .menu-icon {
                 display: block;
+                margin-right: 10px;
             }
             .close-icon {
                 display: none;
@@ -218,6 +224,7 @@
                 top: 60px; 
                 left: 0;
                 background-color: #333;
+                z-index: 1000000;
                 width: 100%;
                 text-align: center;
             }
@@ -245,14 +252,12 @@
             width: 30px;
             height: 30px;
         }
-        .image-slider img {
-        height: 180px;
-    }
-        .bottom-div {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-gap: 4px;
-    }
+        .arrows{
+            display: none;
+        }.main-container {
+        display: flex;
+        justify-content: center;  
+    } 
     .item {
       background-color: white;
       color: gray;
@@ -268,7 +273,8 @@
       padding-bottom: 15px;
       padding-top: 15px;
       margin-bottom: 20px;
-  } 
+  }
+    
     }
 </style>
 </head>
@@ -280,13 +286,13 @@
             <h1><a href="#">Online Shop</a></h1>
         </div>
         <div class="menu-icon" id="menuIcon">
-            <img src="icons/menu.png" alt="Open menu icon">
+            <img src="images/menu.png" alt="Open menu icon">
         </div>
         <div class="nav-links" id="navLinks">
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
             </ul>
             <div class="buttons">
                 <button>Cart <span id="cartCount">0</span></button>
@@ -315,7 +321,6 @@
             <button class="btn" id="electronicsButton">Electronics</button>
         </div>
         <div class="bottom-div" id="contentArea">
-            
         </div>
     </div>
     <footer>
@@ -526,6 +531,7 @@ document.getElementById("menuIcon").addEventListener("click", toggleNav);
             var itemName = event.target.dataset.itemName;
             var itemPrice = parseFloat(event.target.dataset.price);
             cartItems.push({ name: itemName, price: itemPrice });
+            alert('Item added to cart')
         }
     });
 
@@ -545,7 +551,11 @@ document.getElementById("menuIcon").addEventListener("click", toggleNav);
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Cart</title>
-                <style>              
+                <style> 
+                    *{
+                        padding:0;
+                        margin:0;
+                    }             
             body {
                 position: relative;
                 overflow: hidden;
@@ -604,12 +614,13 @@ document.getElementById("menuIcon").addEventListener("click", toggleNav);
             margin-left: 20px;
         }
         .buy-btn{
-            padding: 5px 10px;
+        padding: 5px 10px;
         cursor: pointer;
         background-color: orange;
         font-size: 18px;
         border: none;
         border-radius: 5px;
+        margin-top:6px;
         }
         .buttons button {
             padding: 5px 10px;
@@ -617,13 +628,13 @@ document.getElementById("menuIcon").addEventListener("click", toggleNav);
         }    
         .menu-icon{
         display: none;
+        margin-right:10px;
+    }.container{
+        padding:8rem;
+    }.ordered-item{
+        margin-top:6px;
     }
-     footer {
-        background-color: #333;
-        color: white;
-        text-align: center;
-        padding: 10px;
-    }
+     
     @media only screen and (max-width: 760px) {
         .nav-links {
             display: none;
@@ -637,7 +648,10 @@ document.getElementById("menuIcon").addEventListener("click", toggleNav);
         .menu-icon img {
             width: 30px;
             height: 30px;
-        }
+        }.container{
+        padding-top:4rem;
+        padding-left:1.2rem;
+    }
     }     
         </style>
             </head>
@@ -649,7 +663,7 @@ document.getElementById("menuIcon").addEventListener("click", toggleNav);
         </div>
         <div class="menu-icon">
             <a href="index.html" title="open menu icons">
-                <img src="icons/menu.png" alt="Open menu icon">
+                <img src="images/menu.png" alt="Open menu icon">
             </a>
         </div>
         <div class="nav-links">
@@ -663,22 +677,17 @@ document.getElementById("menuIcon").addEventListener("click", toggleNav);
                 <div class='container'>
                 <h2>Items in Cart</h2>
                 ${cartItems.map(item => `
-                    <img src={${item.image}}/>
-                    <p>${item.name}</p><p> R${(item.price * 1.15).toFixed(2)} <strong>Including</strong> 15% tax.</p>
+                    <div class='ordered-item'>
+                    <p>${item.name}</p><p> R${(item.price).toFixed(2)} <strong>Including</strong> 15% tax.</p>
                 `).join('')}
                 <!-- Total price -->
                 <h3>Total Price (including tax): R${totalPriceWithTax.toFixed(2)}</h3>
                 <button class='buy-btn'>Buy items</button>
                 </div>
-                <!-- Footer -->
-                <footer>
-                   Footer
-                </footer>
+                </div>
             </body>
             </html>
         `;
-
-      
         var cartPage = window.open('');
         cartPage.document.write(cartPageContent);
     }

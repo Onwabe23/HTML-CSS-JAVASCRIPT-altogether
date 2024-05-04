@@ -9,6 +9,7 @@
     *{
         padding: 0;
         margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
     }             
     body {
         position: relative;
@@ -76,27 +77,10 @@
         margin-top: 4rem;
     }
     .text{
-        padding-top: 2rem;
+        padding-top: 4rem;
         padding-bottom: 1.2rem;
     }
-
-    .buttons {
-        display: flex;
-        align-items: center;
-         margin-left: 20px;
-    }
-    .buy-btn{
-        padding: 5px 10px;
-        cursor: pointer;
-        background-color: orange;
-        font-size: 18px;
-        border: none;
-        border-radius: 5px;
-    }
-    .buttons button {
-        padding: 5px 10px;
-        cursor: pointer;
-    }    
+    
     .menu-icon{
          display: none;
     }.content {
@@ -107,13 +91,35 @@
     .buttons button {
         padding: 5px 10px;
         cursor: pointer;
-        background-color: orange;
+        background-color: rgb(205, 135, 6);
         font-size: 18px;
         border: none;
         border-radius: 5px;
+    }form{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1.2rem;
+    }input[type='email'],input[type='text']{
+        width: 320px;
+        margin-bottom: 5px;
+        border-radius: 3px;
+        height: 30px;
+        border: 1px solid #ccc;
     }
-    .profile {
-         width: 460px;
+    textarea{
+        margin-bottom: 5px;
+        border: 1px solid #ccc;
+        height: 60px;
+        border-radius: 5px;
+    }
+    .btn{
+        background-color: goldenrod;
+        border: none;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 2px;
+        cursor: pointer;
+        font-size: 18px;
     }
     footer {
         background-color: #333;
@@ -121,9 +127,8 @@
          text-align: center;
          padding: 10px;
     }p{
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: monospace;
         font-size: 18px;
-        padding-top: 4px;
     }
 @media only screen and (max-width: 760px) {
     .nav-links {
@@ -193,9 +198,6 @@
         flex-direction: column;
         justify-content: space-between;
     }
-    .profile {
-         width: 360px;
-    }
 
 }     
 </style>
@@ -213,7 +215,7 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="#">Contact Us</a></li>
             </ul>
             <div class="buttons">
                 <button>Cart <span id="cartCount">0</span></button>
@@ -221,22 +223,13 @@
         </div>
     </nav>
     <div class='container'>
-    <h2>About the Developer</h2>
-        <div class="content">
-            <img src="images/IMG-20231010-WA0017.jpg" class="profile" alt="">
-            <div class="text">
-                <h3><span>I am</span> Onwabe Zibeke a Software Developer</h3>
-               <p>I am Onwabe Zibeke, a passionate software developer who completed an NQF 7 Bachelor's 
-                degree in Information and Communications Technology at Durban University of Technology,
-                 majoring in Software Engineering, in 2022. Currently, I am unemployed and actively seeking
-                  opportunities in the software development field or an internship to further enhance my
-                   skills and gain valuable industry experience. With a solid foundation in software development
-                    principles and practices, I am eager to contribute my knowledge and expertise to innovative projects.
-                     I am committed to continuous learning and growth, driven by my enthusiasm for leveraging technology
-                      to solve complex 
-                problems and make a meaningful impact in the world of software development.</p>
-            </div>
-        </div>
+    <h2>Contact Page</h2>
+       <form action="/send" method="post">
+        <input type="text" placeholder="Enter Your Full Name" required>
+        <input type="email" placeholder="Enter Your Email Address" required>
+        <textarea placeholder="Type Your Message..." required></textarea>
+        <button class="btn" type="submit">Send</button>
+       </form> 
     </div>
     
     <footer>

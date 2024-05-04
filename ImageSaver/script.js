@@ -12,7 +12,7 @@ function login() {
         window.location.href = 'dashboard.html';
     } else {
         // Otherwise, show error message
-        alert('Invalid username or password.');
+        document.getElementById("passwordError").innerHTML = "Incorrect Username or Password.";
     }
 }
 
@@ -30,7 +30,7 @@ function register() {
     localStorage.setItem('password', password);
 
     // Redirect to login page
-    window.location.href = 'login.html';
+    window.location.href = 'dashboard.html';
 }
 
 // Function to handle user logout
@@ -126,7 +126,6 @@ function uploadImage() {
 function saveImageToLocalStorage(imageData) {
     // Check if images already exist in local storage
     var images = JSON.parse(localStorage.getItem('images')) || [];
-
     // Add the new image data to the array
     images.push(imageData);
 
@@ -163,13 +162,12 @@ function displayImages() {
             imageContainer.appendChild(card);
         });
     } else {
-        imageContainer.innerHTML = '<p>No images uploaded.</p>';
+        imageContainer.innerHTML = '<p>No images uploaded Yet.</p>';
     }
 }
 
 // Function to handle image download
 function downloadImage(imageData, index) {
-    // Convert the base64 image data to Blob
     var blob = dataURItoBlob(imageData);
 
     // Create a download link for the image
@@ -178,8 +176,6 @@ function downloadImage(imageData, index) {
     downloadLink.download = 'image_' + index + '.jpg';
     downloadLink.click();
 }
-
-// Helper function to convert data URI to Blob
 function dataURItoBlob(dataURI) {
     var byteString = atob(dataURI.split(',')[1]);
     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -190,7 +186,5 @@ function dataURItoBlob(dataURI) {
     }
     return new Blob([ab], { type: mimeString });
 }
-
-// Call displayImages() when the page loads
 window.onload = displayImages;
 
